@@ -2,7 +2,7 @@
   "name": "npm-package-version-bumper",
   "displayName": "NPM Package Version Bumper",
   "description": "Bump NPM Package versions with ease right from your menu bar",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "jeffreylanters",
   "license": "UNLICENSED",
   "repository": {
