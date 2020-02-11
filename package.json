@@ -1,0 +1,48 @@
+{
+  "name": "npm-package-version-bumper",
+  "displayName": "NPM Package Version Bumper",
+  "description": "Bump NPM Package versions with ease right from your menu bar",
+  "version": "1.0.0",
+  "publisher": "jeffreylanters",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeffreylanters/vscode-npm-package-version-bumper.git"
+  },
+  "icon": "resources/package/icon.png",
+  "galleryBanner": {
+    "color": "#c70d13"
+  },
+  "categories": [
+    "Other"
+  ],
+  "engines": {
+    "vscode": "^1.7.1"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./distribution/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "bump-npm-package-version",
+        "title": "Bump NPM Package Version"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "tslint -p ./",
+    "watch": "tsc -w -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.4",
+    "@types/vscode": "^1.7.1",
+    "typescript": "^3.6.2",
+    "vsce": "^1.66.0"
+  },
+  "dependencies": {}
+}
