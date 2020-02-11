@@ -19,14 +19,23 @@ class Extension {
   public deactivate(): void {}
 
   private async onBumpVersion() {
-    const _pick = await window.showQuickPick(["Major", "Minor", "Patch"]);
+    const _pick = await window.showQuickPick([
+      "Major",
+      "Minor",
+      "Patch",
+      "Pre-Major",
+      "Pre-Minor",
+      "Pre-Patch",
+      "Pre-Release"
+    ]);
     if (
       typeof _pick !== "undefined" &&
       typeof workspace.workspaceFolders !== "undefined" &&
       workspace.workspaceFolders.length > 0
     ) {
+      const _version = _pick.toLowerCase().replace("-", "");
       window.showInformationMessage(`Bumped ${_pick} NPM Package Version`);
-      ChildProcess.exec(`npm version ${_pick!.toLowerCase()}`, {
+      ChildProcess.exec(`npm version ${_version}`, {
         cwd: workspace.workspaceFolders[0].uri.fsPath
       });
     }
