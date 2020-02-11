@@ -32,13 +32,18 @@ class Extension {
       typeof _pick !== "undefined" &&
       typeof workspace.workspaceFolders !== "undefined" &&
       workspace.workspaceFolders.length > 0
-    ) {
-      const _version = _pick.toLowerCase().replace("-", "");
-      window.showInformationMessage(`Bumped ${_pick} NPM Package Version`);
-      ChildProcess.exec(`npm version ${_version}`, {
-        cwd: workspace.workspaceFolders[0].uri.fsPath
-      });
-    }
+    )
+      ChildProcess.exec(
+        `npm version ${_pick.toLowerCase().replace("-", "")}`,
+        { cwd: workspace.workspaceFolders[0].uri.fsPath },
+        _error => {
+          window.showWarningMessage(
+            typeof _error !== "undefined"
+              ? `Something went wrong while bumping...\n\n${_error!.message}`
+              : `Bumped ${_pick} NPM Package Version`
+          );
+        }
+      );
   }
 }
 
