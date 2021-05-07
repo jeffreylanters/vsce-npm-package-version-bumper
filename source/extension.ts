@@ -1,53 +1,65 @@
 import { window, commands, workspace } from "vscode";
 import { ExtensionContext } from "vscode";
-import * as ChildProcess from "child_process";
+import { exec as ChildProcessExec, ExecException } from "child_process";
 
 class Extension {
+  private readonly versionBumpTypes: string[] = [
+    "Major",
+    "Minor",
+    "Patch",
+    "Pre-Major",
+    "Pre-Minor",
+    "Pre-Patch",
+    "Pre-Release",
+  ];
+
   public activate(context: ExtensionContext): void {
-    const _item = window.createStatusBarItem();
-    _item.text = "$(versions) Bump";
-    _item.tooltip = "Bump Npm Package Version";
-    _item.command = "bump-npm-package-version";
-    _item.show();
-    const _command = commands.registerCommand(
+    const statusBarItem = window.createStatusBarItem();
+    statusBarItem.text = "$(versions) Bump";
+    statusBarItem.tooltip = "Bump Npm Package Version";
+    statusBarItem.command = "bump-npm-package-version";
+    statusBarItem.show();
+    const command = commands.registerCommand(
       "bump-npm-package-version",
-      this.onBumpVersion.bind(this)
+      this.handleOnCommandBumpNpmPackageVersion.bind(this)
     );
-    context.subscriptions.push(_item, _command);
+    context.subscriptions.push(statusBarItem, command);
   }
 
-  public deactivate(): void {}
-
-  private async onBumpVersion() {
-    const _pick = await window.showQuickPick([
-      "Major",
-      "Minor",
-      "Patch",
-      "Pre-Major",
-      "Pre-Minor",
-      "Pre-Patch",
-      "Pre-Release"
-    ]);
+  private async handleOnCommandBumpNpmPackageVersion() {
+    const picked = await window.showQuickPick(this.versionBumpTypes);
     if (
-      typeof _pick !== "undefined" &&
+      typeof picked !== "undefined" &&
       typeof workspace.workspaceFolders !== "undefined" &&
       workspace.workspaceFolders.length > 0
     )
-      ChildProcess.exec(
-        `npm version ${_pick.toLowerCase().replace("-", "")}`,
+      ChildProcessExec(
+        `npm version ${picked.toLowerCase().replace("-", "")}`,
         { cwd: workspace.workspaceFolders[0].uri.fsPath },
-        _error => {
-          window.showWarningMessage(
-            typeof _error !== "undefined"
-              ? `Something went wrong while bumping...\n\n${_error!.message}`
-              : `Bumped ${_pick} NPM Package Version`
-          );
-        }
+        this.handleOnChildProcessExecCompleted.bind(this)
       );
   }
+
+  private handleOnChildProcessExecCompleted(
+    error: ExecException | null,
+    stdOut?: string,
+    strError?: string
+  ): void {
+    if (typeof error !== "undefined")
+      window.showErrorMessage(
+        `Something went wrong while bumping: ${error!.message}`
+      );
+    else
+      window.showInformationMessage(
+        "Successfully bumped the NPM Package Version"
+      );
+  }
+
+  public deactivate(): void {}
 }
 
 const extension = new Extension();
+
 export function activate(context: ExtensionContext): void {
   extension.activate(context);
 }
