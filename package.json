@@ -39,10 +39,10 @@
     "package": "vsce package"
   },
   "devDependencies": {
-    "@types/node": "^12.7.4",
-    "@types/vscode": "^1.7.1",
-    "typescript": "^3.6.2",
-    "vsce": "^1.66.0"
+    "@types/node": "12.7.4",
+    "@types/vscode": "1.7.1",
+    "typescript": "3.6.2",
+    "vsce": "1.66.0"
   },
   "dependencies": {}
 }
