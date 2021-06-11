@@ -44,10 +44,12 @@ class Extension {
     // Prepare command & arguments
     let command = `npm version ${picked}`;
 
-    const configuredPreId = workspace.getConfiguration().get('npm-package-version-bumper.preid');
+    if (picked === 'prerelease') {
+      const preid = await window.showInputBox({"placeHolder": "Pre-Release Identifier"});
 
-    if (configuredPreId !== null) {
-      command += ` --preid=${configuredPreId}`;
+      if (preid !== undefined && preid.trim() !== "") {
+        command += ` --preid=${preid}`;
+      }
     }
 
     const commandArguments = {

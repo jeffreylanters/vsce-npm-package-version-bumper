@@ -29,17 +29,7 @@
         "command": "bump-npm-package-version",
         "title": "Bump NPM Package Version"
       }
-    ],
-    "configuration": {
-      "title": "NPM Package Version Bumper",
-      "properties": {
-        "npm-package-version-bumper.preid": {
-          "type": ["string", "null"],
-          "default": null,
-          "description": "Specifies the preid to use for the npm version."
-        }
-      }
-    }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
