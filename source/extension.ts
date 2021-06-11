@@ -27,17 +27,35 @@ class Extension {
   }
 
   private async handleOnCommandBumpNpmPackageVersion() {
-    const picked = await window.showQuickPick(this.versionBumpTypes);
-    if (
-      typeof picked !== "undefined" &&
-      typeof workspace.workspaceFolders !== "undefined" &&
-      workspace.workspaceFolders.length > 0
-    )
-      ChildProcessExec(
-        `npm version ${picked.toLowerCase().replace("-", "")}`,
-        { cwd: workspace.workspaceFolders[0].uri.fsPath },
-        this.handleOnChildProcessExecCompleted.bind(this)
-      );
+    // Check if user is in a workspace
+    if (workspace.workspaceFolders === undefined || workspace.workspaceFolders.length === 0) {
+      return;
+    }
+
+    // Show bump version menu
+    let picked = await window.showQuickPick(this.versionBumpTypes);
+
+    if (picked === undefined) {
+      return;
+    }
+
+    picked = picked.toLowerCase().replace("-", "");
+
+    // Prepare command & arguments
+    let command = `npm version ${picked}`;
+
+    const configuredPreId = workspace.getConfiguration().get('npm-package-version-bumper.preid');
+
+    if (configuredPreId !== null) {
+      command += ` --preid=${configuredPreId}`;
+    }
+
+    const commandArguments = {
+      cwd: workspace.workspaceFolders[0].uri.fsPath
+    };
+
+    // Execute command
+    ChildProcessExec(command, commandArguments, this.handleOnChildProcessExecCompleted.bind(this));
   }
 
   private handleOnChildProcessExecCompleted(
