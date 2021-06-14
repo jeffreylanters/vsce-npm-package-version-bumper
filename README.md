@@ -38,7 +38,7 @@ Hi! My name is Jeffrey Lanters, thanks for checking out my modules! I’m a deve
 
 # Installation
 
-Install NPM Package Version Bumper Extension for Visual Studio Code by running the following command, or follow one of the instructions below.
+Install the NPM Package Version Bumper Extension for Visual Studio Code by running the following command, or follow one of the instructions below.
 
 ```
 $ code --install-extension jeffreylanters.npm-package-version-bumper
