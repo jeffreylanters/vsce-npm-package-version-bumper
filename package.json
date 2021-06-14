@@ -21,7 +21,7 @@
     "vscode": "^1.7.1"
   },
   "activationEvents": [
-    "*"
+    "workspaceContains:package.json"
   ],
   "main": "./distribution/extension.js",
   "contributes": {
