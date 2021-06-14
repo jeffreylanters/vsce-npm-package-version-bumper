@@ -22,9 +22,5 @@ jobs:
         run: npm install
       - name: Install Global Dependencies
         run: npm install vsce --global
-      - name: Compile Source
-        run: npm run compile
-      - name: Package Package
-        run: vsce package
       - name: Publish Package
         run: vsce publish --pat ${{secrets.VSM_AUTH_TOKEN}}

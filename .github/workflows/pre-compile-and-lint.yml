@@ -17,4 +17,4 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Compile Source
-        run: npm run compile
+        run: npm run precompile
