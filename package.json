@@ -34,7 +34,8 @@
   },
   "scripts": {
     "start": "tsc --watch --project ./",
-    "vscode:prepublish": "tsc --project ./"
+    "precompile": "tsc --project ./",
+    "vscode:prepublish": "npm run precompile"
   },
   "devDependencies": {
     "@types/node": "15.12.2",
