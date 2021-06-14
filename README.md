@@ -38,17 +38,15 @@ Hi! My name is Jeffrey Lanters, thanks for checking out my modules! I’m a deve
 
 # Installation
 
-Follow one of the following instructions to install the NPM Package Version Bumper Extension for Visual Studio Code.
-
-- [Directly install the Extension in Visual Studio Code](vscode:extension/jeffreylanters.npm-package-version-bumper)
-- Search for NPM Package Version Bumper in the Extensions tab
-- [Head over to the VSCode Marketplace to install](https://marketplace.visualstudio.com/items?itemName=jeffreylanters.npm-package-version-bumper)
-- [Download the VSIX file from the Releases to install manually](https://github.com/jeffreylanters/vsce-npm-package-version-bumper/releases)
-- Install using the following command in the terminal
+Install NPM Package Version Bumper Extension for Visual Studio Code by running the following command, or follow one of the instructions below.
 
 ```
 $ code --install-extension jeffreylanters.npm-package-version-bumper
 ```
+
+- Search for NPM Package Version Bumper in the Extensions tab
+- [Head over to the VSCode Marketplace to install](https://marketplace.visualstudio.com/items?itemName=jeffreylanters.npm-package-version-bumper)
+- [Download the VSIX file from the Releases to install manually](https://github.com/jeffreylanters/vsce-npm-package-version-bumper/releases)
 
 # Documentation
 
