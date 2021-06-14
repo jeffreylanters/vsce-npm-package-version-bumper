@@ -28,7 +28,10 @@ class Extension {
 
   private async handleOnCommandBumpNpmPackageVersion() {
     // Check if user is in a workspace
-    if (workspace.workspaceFolders === undefined || workspace.workspaceFolders.length === 0) {
+    if (
+      workspace.workspaceFolders === undefined ||
+      workspace.workspaceFolders.length === 0
+    ) {
       return;
     }
 
@@ -44,20 +47,26 @@ class Extension {
     // Prepare command & arguments
     let command = `npm version ${picked}`;
 
-    if (picked === 'prerelease') {
-      const preid = await window.showInputBox({"placeHolder": "Pre-Release Identifier"});
+    if (picked === "prerelease") {
+      const preid = await window.showInputBox({
+        placeHolder: "Pre-Release Identifier",
+      });
 
       if (preid !== undefined && preid.trim() !== "") {
-        command += ` --preid=${preid}`;
+        command += ` --preid="${preid}"`;
       }
     }
 
     const commandArguments = {
-      cwd: workspace.workspaceFolders[0].uri.fsPath
+      cwd: workspace.workspaceFolders[0].uri.fsPath,
     };
 
     // Execute command
-    ChildProcessExec(command, commandArguments, this.handleOnChildProcessExecCompleted.bind(this));
+    ChildProcessExec(
+      command,
+      commandArguments,
+      this.handleOnChildProcessExecCompleted.bind(this)
+    );
   }
 
   private handleOnChildProcessExecCompleted(
