@@ -2,9 +2,6 @@
 
 # NPM Package Version Bumper
 
-<br/>
-<br/>
-
 [![license](https://img.shields.io/badge/license-Apache_2.0-red.svg?style=for-the-badge)](https://github.com/jeffreylanters/vsce-npm-package-version-bumper/blob/master/LICENSE.md)
 [![VSM](https://img.shields.io/visual-studio-marketplace/v/jeffreylanters.npm-package-version-bumper?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=jeffreylanters.npm-package-version-bumper)
 [![build](https://img.shields.io/github/checks-status/jeffreylanters/vsce-npm-package-version-bumper/master?label=build&style=for-the-badge)](https://github.com/jeffreylanters/vsce-npm-package-version-bumper/actions)
