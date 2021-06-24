@@ -33,7 +33,8 @@
     ]
   },
   "scripts": {
-    "start": "tsc --watch --project ./",
+    "start": "npm run watch",
+    "watch": "tsc --watch --project ./",
     "precompile": "tsc --project ./",
     "vscode:prepublish": "npm run precompile"
   },
