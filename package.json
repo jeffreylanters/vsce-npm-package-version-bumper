@@ -28,15 +28,20 @@
     "configuration": {
       "title": "NPM Package Version Bumper",
       "properties": {
-        "npmPackageVersionBumper.askForReleaseMessage": {
+        "npmPackageVersionBumper.askForMessage": {
           "type": "boolean",
           "default": true,
-          "description": "Ask for a release version message when creating a release."
+          "description": "Ask for a message when bumping a version."
         },
         "npmPackageVersionBumper.includePreVersions": {
           "type": "boolean",
           "default": true,
           "description": "Include pre-release versions in the picker."
+        },
+        "npmPackageVersionBumper.createGitVersionTag": {
+          "type": "boolean",
+          "default": true,
+          "description": "Create a git tag when bumping a version."
         }
       }
     },
