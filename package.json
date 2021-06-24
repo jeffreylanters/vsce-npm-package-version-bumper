@@ -25,6 +25,21 @@
   ],
   "main": "./distribution/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "NPM Package Version Bumper",
+      "properties": {
+        "npmPackageVersionBumper.askForReleaseMessage": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask for a release version message when creating a release."
+        },
+        "npmPackageVersionBumper.includePreVersions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include pre-release versions in the picker."
+        }
+      }
+    },
     "commands": [
       {
         "command": "bump-npm-package-version",
