@@ -70,12 +70,21 @@ async function handleOnBumpNpmPackageVerisonCommand() {
       }
     }
 
-    // release message
-    const askForReleaseMessage = workspaceConfiguration.get<boolean>(
-      "npmPackageVersionBumper.askForReleaseMessage"
+    // git version tags
+    const createGitVersionTag = workspaceConfiguration.get<boolean>(
+      "npmPackageVersionBumper.createGitVersionTag"
     );
 
-    if (askForReleaseMessage === true) {
+    if (createGitVersionTag === false) {
+      command += " --no-git-tag-version";
+    }
+
+    // release message
+    const askForMessage = workspaceConfiguration.get<boolean>(
+      "npmPackageVersionBumper.askForMessage"
+    );
+
+    if (askForMessage === true) {
       const message = await window.showInputBox({
         placeHolder: "Release Message (optional)",
       });
