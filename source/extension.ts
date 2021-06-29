@@ -10,7 +10,7 @@ const preVersionNames: Array<string> = [
   "Pre-Release",
 ];
 
-function addContextSubscriptions(context: ExtensionContext) {
+export function activate(context: ExtensionContext) {
   const statusBarItem = window.createStatusBarItem();
   statusBarItem.text = "$(versions) Bump";
   statusBarItem.tooltip = "Bump Npm Package Version";
@@ -102,6 +102,18 @@ async function handleOnBumpNpmPackageVerisonCommand() {
     const result = await executeCommand(command, options);
 
     window.showInformationMessage(`Bumped Package Version: ${result}`);
+
+    // // ask to push to origin
+    // const selection = await window.showInformationMessage(
+    //   `Bumped Package Version: ${result}`
+    //   "Push to origin"
+    // );
+
+    // if (selection !== undefined && selection === "Push to origin") {
+    //   const command = `GITHEADTAG=$(git tag --points-at HEAD) && git push origin "$GITHEADTAG"`;
+    //   const result = await executeCommand(command, options);
+    //   window.showInformationMessage("Pushed Tag to origin");
+    // }
   } catch (error) {
     window.showErrorMessage(`Unable to Bump Package Version: ${error}`);
   }
@@ -118,9 +130,3 @@ function executeCommand(command: string, options: Object): Promise<string> {
     });
   });
 }
-
-export function activate(context: ExtensionContext) {
-  addContextSubscriptions(context);
-}
-
-export function deactivate() {}
