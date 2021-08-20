@@ -4,7 +4,6 @@
 
 [![license](https://img.shields.io/badge/license-Apache_2.0-red.svg?style=for-the-badge)](https://github.com/jeffreylanters/vsce-npm-package-version-bumper/blob/master/LICENSE.md)
 [![VSM](https://img.shields.io/visual-studio-marketplace/v/jeffreylanters.npm-package-version-bumper?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=jeffreylanters.npm-package-version-bumper)
-[![build](https://img.shields.io/github/checks-status/jeffreylanters/vsce-npm-package-version-bumper/master?label=build&style=for-the-badge)](https://github.com/jeffreylanters/vsce-npm-package-version-bumper/actions)
 [![build](https://img.shields.io/github/workflow/status/jeffreylanters/vsce-npm-package-version-bumper/Pre-Compile%20and%20Lint?style=for-the-badge)](https://github.com/jeffreylanters/vsce-npm-package-version-bumper/actions)
 [![deployment](https://img.shields.io/github/deployments/jeffreylanters/vsce-npm-package-version-bumper/Visual%20Studio%20Marketplace?style=for-the-badge)](https://github.com/jeffreylanters/vsce-npm-package-version-bumper/deployments/activity_log?environment=Visual+Studio+Marketplace)
 [![stars](https://img.shields.io/github/stars/jeffreylanters/vsce-npm-package-version-bumper.svg?style=for-the-badge&color=fe8523)](https://github.com/jeffreylanters/vsce-npm-package-version-bumper/stargazers)
