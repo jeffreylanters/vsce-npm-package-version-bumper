@@ -7,7 +7,7 @@
 [![build](https://img.shields.io/github/workflow/status/jeffreylanters/vsce-npm-package-version-bumper/Pre-Compile%20and%20Lint?style=for-the-badge)](https://github.com/jeffreylanters/vsce-npm-package-version-bumper/actions)
 [![deployment](https://img.shields.io/github/deployments/jeffreylanters/vsce-npm-package-version-bumper/Visual%20Studio%20Marketplace?style=for-the-badge)](https://github.com/jeffreylanters/vsce-npm-package-version-bumper/deployments/activity_log?environment=Visual+Studio+Marketplace)
 [![stars](https://img.shields.io/github/stars/jeffreylanters/vsce-npm-package-version-bumper.svg?style=for-the-badge&color=fe8523)](https://github.com/jeffreylanters/vsce-npm-package-version-bumper/stargazers)
-[![downloads](https://img.shields.io/visual-studio-marketplace/d/jeffreylanters.npm-package-version-bumper?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=jeffreylanters.npm-package-version-bumper)
+[![downloads](https://img.shields.io/visual-studio-marketplace/d/jeffreylanters.npm-package-version-bumper?style=for-the-badge&&color=40AA72)](https://marketplace.visualstudio.com/items?itemName=jeffreylanters.npm-package-version-bumper)
 [![size](https://img.shields.io/visual-studio-marketplace/stars/jeffreylanters.npm-package-version-bumper?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=jeffreylanters.npm-package-version-bumper&ssr=false#review-details)
 [![sponsors](https://img.shields.io/github/sponsors/jeffreylanters?color=E12C9A&style=for-the-badge)](https://github.com/sponsors/jeffreylanters)
 [![donate](https://img.shields.io/badge/donate-paypal-F23150?style=for-the-badge)](https://paypal.me/jeffreylanters)
