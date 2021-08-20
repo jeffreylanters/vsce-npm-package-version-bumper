@@ -42,3 +42,9 @@ Use this package to bump the version and write the new data back to package.json
 The newversion argument will be a valid semver string, a valid second argument to semver.inc (one of patch, minor, major, prepatch, preminor, premajor or prerelease). In the second case, the existing version will be incremented by 1 in the specified field.
 
 ![preview](https://raw.githubusercontent.com/jeffreylanters/vsce-npm-package-version-bumper/master/resources/package/preview.png)
+
+# Contribution and Development
+
+When contributing to this repository, please first discuss the change you wish to make via the discussion board with me before making a change. Before commiting, please compile your code using npm run compile and open a pull request.
+
+If you want to modify this package and iteratively test it in inside your application, start the "Run Extension" launch configuration from the Debug Tab. This will open a new Extension Development host Window which allows you to test the extension and its functionality.
