@@ -30,11 +30,6 @@ jobs:
 
       - name: Install Global Dependencies
         run: npm install vsce --global
-        
-      - name: Swap Readme
-        run: |
-          mv README.md GITHUB.md
-          mv MARKETPLACE.md README.md
 
       - name: Publish Package
         run: vsce publish --pat ${{secrets.VSM_AUTH_TOKEN}}
