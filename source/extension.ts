@@ -38,6 +38,11 @@ async function handleOnBumpNpmPackageVerisonCommand() {
   try {
     const workspaceConfiguration = workspace.getConfiguration();
 
+    // execution options
+    const options = {
+      cwd: workspace.workspaceFolders[0].uri.fsPath,
+    };
+
     // show version name picker
     const includePreVersion = workspaceConfiguration.get(
       "npmPackageVersionBumper.includePreVersions"
@@ -53,6 +58,7 @@ async function handleOnBumpNpmPackageVerisonCommand() {
       return;
     }
 
+    // get the version name and replace it to match the command arg
     picked = picked.toLowerCase().replace("-", "");
 
     let command = `npm version ${picked}`;
@@ -95,30 +101,38 @@ async function handleOnBumpNpmPackageVerisonCommand() {
     }
 
     // execute command
-    const options = {
-      cwd: workspace.workspaceFolders[0].uri.fsPath,
-    };
-
     const result = await executeCommand(command, options);
 
-    window.showInformationMessage(`Bumped Package Version: ${result}`);
+    const gitPushButtonLabel = "Git Push with Tags";
 
-    // // ask to push to origin
-    // const selection = await window.showInformationMessage(
-    //   `Bumped Package Version: ${result}`
-    //   "Push to origin"
-    // );
+    // show result and ask to push to origin
+    const selection = await window.showInformationMessage(
+      `Bumped Package Version: ${result}`,
+      gitPushButtonLabel
+    );
 
-    // if (selection !== undefined && selection === "Push to origin") {
-    //   const command = `GITHEADTAG=$(git tag --points-at HEAD) && git push origin "$GITHEADTAG"`;
-    //   const result = await executeCommand(command, options);
-    //   window.showInformationMessage("Pushed Tag to origin");
-    // }
+    try {
+      // if a selection is made push to origin with tags
+      if (selection !== undefined && selection === gitPushButtonLabel) {
+        const command = `git push --follow-tags`;
+
+        // execute command
+        await executeCommand(command, options);
+
+        // show result
+        window.showInformationMessage(`Pushed Tag to origin`);
+      }
+    } catch (error) {
+      // if an error occurs during pushing to git show error
+      window.showErrorMessage(`Unable to Push Tags to Origin: ${error}`);
+    }
   } catch (error) {
+    // if an error occurs during the version bump show error
     window.showErrorMessage(`Unable to Bump Package Version: ${error}`);
   }
 }
 
+// helper method to execute a command async
 function executeCommand(command: string, options: Object): Promise<string> {
   return new Promise<string>(function (resolve, reject) {
     executeChildProcess(command, options, function (error, strOut) {
