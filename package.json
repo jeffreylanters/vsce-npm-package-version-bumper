@@ -60,7 +60,11 @@
   },
   "devDependencies": {
     "@types/node": "15.12.2",
+    "@types/semver": "^7.3.8",
     "@types/vscode": "^1.7.1",
     "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "semver": "^7.3.5"
   }
 }

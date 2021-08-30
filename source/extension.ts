@@ -1,5 +1,6 @@
 import { window, commands, workspace } from "vscode";
 import { ExtensionContext } from "vscode";
+import { parse } from "semver";
 import { exec as executeChildProcess } from "child_process";
 
 const versionNames: Array<string> = ["Major", "Minor", "Patch"];
@@ -54,25 +55,53 @@ async function handleOnBumpNpmPackageVerisonCommand() {
         : versionNames
     );
 
+    // check if user canceled
     if (picked === undefined) {
       return;
     }
 
-    // get the version name and replace it to match the command arg
+    // replace it to match the command argument
     picked = picked.toLowerCase().replace("-", "");
 
-    let command = `npm version ${picked}`;
+    let command = ["npm", "version", picked];
 
-    // pre-id
+    // if user picked prerelease ask for identifier
     if (picked === "prerelease") {
       const preid = await window.showInputBox({
         placeHolder: "Pre-Release Identifier",
       });
 
-      if (preid !== undefined && /^[a-zA-Z]+$/.test(preid)) {
-        command += ` --preid="${preid}"`;
-      } else {
+      // check if user canceled or invalid preid
+      if (preid === undefined || /^[a-zA-Z]+$/.test(preid) === false) {
         throw new Error(`Invalid Pre-Release Identifier`);
+      }
+
+      // add preid to command
+      command.push(`--preid=${preid}`);
+
+      // check for initial prerelease version
+      const currentVersion = await executeCommand(`node -p "require('./package.json').version"`, options);
+      const currentPrerelease = parse(currentVersion)?.prerelease;
+
+      // check if version parsing failed
+      if (currentPrerelease === undefined) {
+        throw new Error(`Invalid current version`);
+      }
+
+      // if preid is null or different show version name picker
+      if (currentPrerelease === null || currentPrerelease[1] !== preid) {
+        picked = await window.showQuickPick(versionNames);
+
+        // check if user canceled
+        if (picked === undefined) {
+          return;
+        }
+
+        // replace it to match the command argument
+        picked = picked.toLowerCase().replace("-", "");
+
+        // switch to new version name
+        command[2] = picked;
       }
     }
 
@@ -82,7 +111,7 @@ async function handleOnBumpNpmPackageVerisonCommand() {
     );
 
     if (createGitVersionTag === false) {
-      command += " --no-git-tag-version";
+      command.push(" --no-git-tag-version");
     }
 
     // release message
@@ -96,12 +125,13 @@ async function handleOnBumpNpmPackageVerisonCommand() {
       });
 
       if (message !== undefined && message.trim().length > 0) {
-        command += ` --message="${message}"`;
+        command.push(` --message="${message}"`);
       }
     }
 
     // execute command
-    const result = await executeCommand(command, options);
+    const joinedCommand = command.join(" ");
+    const result = await executeCommand(joinedCommand, options);
 
     const gitPushButtonLabel = "Git Push with Tags";
 
