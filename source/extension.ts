@@ -64,7 +64,7 @@ async function handleOnBumpNpmPackageVerisonCommand() {
     let command = `npm version ${picked}`;
 
     // pre-id
-    if (picked === "prerelease") {
+    if (picked.includes("pre")) {
       const preid = await window.showInputBox({
         placeHolder: "Pre-Release Identifier",
       });
